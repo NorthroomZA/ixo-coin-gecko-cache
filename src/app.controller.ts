@@ -1,52 +1,56 @@
 import { Controller, Get } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern({ cmd: 'bitcoin' })
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+
+  @Get('bitcoin')
   getBitcoin() {
     return this.appService.getBitcoin();
   }
 
-  @MessagePattern({ cmd: 'ethereum' })
+  @Get('ethereum')
   getEthereum() {
     return this.appService.getEthereum();
   }
 
-  @MessagePattern({ cmd: 'matic-wormhole' })
+  @Get('matic-wormhole')
   getMaticWormhole() {
     return this.appService.getMaticWormhole();
   }
 
-  @MessagePattern({ cmd: 'ixo' })
+  @Get('ixo')
   getIxo() {
     return this.appService.getIxo();
   }
 
-  @MessagePattern({ cmd: 'toucan-protocol-nature-carbon-tonne' })
+  @Get('toucan-protocol-nature-carbon-tonne')
   getToucanProtocolNatureCarbonTonne() {
     return this.appService.getToucanProtocolNatureCarbonTonne();
   }
 
-  @MessagePattern({ cmd: 'toucan-protocol-base-carbon-tonne' })
+  @Get('toucan-protocol-base-carbon-tonne')
   getToucanProtocolBaseCarbonTonne() {
     return this.appService.getToucanProtocolBaseCarbonTonne();
   }
 
-  @MessagePattern({ cmd: 'cosmos' })
+  @Get('cosmos')
   getCosmos() {
     return this.appService.getCosmos();
   }
 
-  @MessagePattern({ cmd: 'regen' })
+  @Get('regen')
   getRegen() {
     return this.appService.getRegen();
   }
 
-  @MessagePattern({ cmd: 'osmosis' })
+  @Get('osmosis')
   getOsmosis() {
     return this.appService.getOsmosis();
   }

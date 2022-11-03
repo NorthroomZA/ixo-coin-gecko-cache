@@ -7,6 +7,10 @@ const days = '1';
 @Injectable()
 @UseInterceptors(CacheInterceptor)
 export class AppService {
+  getHello(): string {
+    return 'API Running';
+  }
+
   async getBitcoin() {
     const denom = 'bitcoin';
     const res = await axios.get(

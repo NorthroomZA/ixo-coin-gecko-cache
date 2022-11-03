@@ -716,14 +716,6 @@
     "tslib" "2.4.0"
     "uuid" "9.0.0"
 
-"@nestjs/microservices@^9.0.0", "@nestjs/microservices@^9.1.6":
-  "integrity" "sha512-ppcA+ihIEJRvjpGc/ognlWwpp3Kra6wyH66BvqWJiNQa8T44V4Jrgn4mhQkd91TuVlGVS2vhG2KGeColLb70Sw=="
-  "resolved" "https://registry.npmjs.org/@nestjs/microservices/-/microservices-9.1.6.tgz"
-  "version" "9.1.6"
-  dependencies:
-    "iterare" "1.2.1"
-    "tslib" "2.4.0"
-
 "@nestjs/platform-express@^9.0.0":
   "integrity" "sha512-zZuB1g6yIPytPIzp0EYKWT+1d02hOQ5aU6VdtO6Qg0Wn1RjdjGh3kScsqdamMEjzt0WAfL8DjE5oqrLgvashsw=="
   "resolved" "https://registry.npmjs.org/@nestjs/platform-express/-/platform-express-9.1.6.tgz"
@@ -1584,7 +1576,7 @@
   "resolved" "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz"
   "version" "3.1.2"
 
-"cache-manager@*", "cache-manager@^5.1.3", "cache-manager@<=5":
+"cache-manager@^5.1.3", "cache-manager@<=5":
   "integrity" "sha512-6KhSzceh/1yBfm5QmSN2ohQsMsavLNPlOKZ8gWX7yDHBrnwNCGK6p4LYp189zRGNb3BLFioJlUZKQ3LckteWlg=="
   "resolved" "https://registry.npmjs.org/cache-manager/-/cache-manager-5.1.3.tgz"
   "version" "5.1.3"
