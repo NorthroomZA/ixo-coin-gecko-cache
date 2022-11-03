@@ -1,45 +1,85 @@
-import { Injectable } from '@nestjs/common';
-import { readFileSync } from 'fs';
+import { CacheInterceptor, Injectable, UseInterceptors } from '@nestjs/common';
+const axios = require('axios');
+
+const currency = 'USD';
+const days = '1';
 
 @Injectable()
+@UseInterceptors(CacheInterceptor)
 export class AppService {
   getHello(): string {
     return 'API Running';
   }
 
-  getBitcoin() {
-    return readFileSync('./src/cache/bitcoin.json');
+  async getBitcoin() {
+    const denom = 'bitcoin';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getEthereum() {
-    return readFileSync('./src/cache/ethereum.json');
+  async getEthereum() {
+    const denom = 'ethereum';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getMaticWormhole() {
-    return readFileSync('./src/cache/matic-wormhole.json');
+  async getMaticWormhole() {
+    const denom = 'matic-wormhole';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getIxo() {
-    return readFileSync('./src/cache/ixo.json');
+  async getIxo() {
+    const denom = 'ixo';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getToucanProtocolNatureCarbonTonne() {
-    return readFileSync('./src/cache/toucan-protocol-nature-carbon-tonne.json');
+  async getToucanProtocolNatureCarbonTonne() {
+    const denom = 'toucan-protocol-nature-carbon-tonne';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getToucanProtocolBaseCarbonTonne() {
-    return readFileSync('./src/cache/toucan-protocol-base-carbon-tonne.json');
+  async getToucanProtocolBaseCarbonTonne() {
+    const denom = 'toucan-protocol-base-carbon-tonne';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getCosmos() {
-    return readFileSync('./src/cache/cosmos.json');
+  async getCosmos() {
+    const denom = 'cosmos';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getRegen() {
-    return readFileSync('./src/cache/regen.json');
+  async getRegen() {
+    const denom = 'regen';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 
-  getOsmosis() {
-    return readFileSync('./src/cache/osmosis.json');
+  async getOsmosis() {
+    const denom = 'osmosis';
+    const res = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${currency}&days=${days}`,
+    );
+    return res.data;
   }
 }
