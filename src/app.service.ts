@@ -1,11 +1,13 @@
-import { CacheInterceptor, Injectable, UseInterceptors } from '@nestjs/common';
-const axios = require('axios');
+import { Injectable } from '@nestjs/common';
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
+
+axiosRetry(axios, { retries: 3 });
 
 const currency = 'USD';
 const days = '1';
 
 @Injectable()
-@UseInterceptors(CacheInterceptor)
 export class AppService {
   getHello(): string {
     return 'API Running';

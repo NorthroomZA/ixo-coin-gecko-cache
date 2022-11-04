@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [CacheModule.register({ ttl: 300000 })],
+  imports: [CacheModule.register({ ttl: 300000, max: 1000 })],
   controllers: [AppController],
   providers: [AppService],
 })
