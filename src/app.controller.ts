@@ -14,16 +14,41 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    try {
+      return this.appService.getHello();
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
   @Get('/:denom')
   getChartData(@Param('denom') denom: string) {
-    return this.appService.getChartData(denom);
+    try {
+      return this.appService.getChartData(denom);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
   @Get('/:denom/price')
   getPrice(@Param('denom') denom: string) {
-    return this.appService.getPrice(denom);
+    try {
+      return this.appService.getPrice(denom);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  @Get('/all')
+  getChartDataAndPrices() {
+    try {
+      return this.appService.getChartDataAndPrices();
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 }
