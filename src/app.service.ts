@@ -25,7 +25,7 @@ export class AppService {
     return 'API Running';
   }
 
-  async getChartData(denom: string) {
+  async getChart(denom: string) {
     const temp = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${this.currency}&days=${this.days}`,
     );
@@ -66,15 +66,33 @@ export class AppService {
     };
   }
 
-  async getChartDataAndPrices() {
+  async getAllChartsAndPrices() {
     const chartData: any[] = [];
     const priceData: any[] = [];
     this.denoms.forEach(async (denom) => {
-      const chart = await this.getChartData(denom);
+      const chart = await this.getChart(denom);
       const price = await this.getPrice(denom);
       chartData.push({ denom: chart });
       priceData.push({ denom: price });
     });
     return { charts: chartData, prices: priceData };
+  }
+
+  async getAllCharts() {
+    const chartData: any[] = [];
+    this.denoms.forEach(async (denom) => {
+      const chart = await this.getChart(denom);
+      chartData.push({ denom: chart });
+    });
+    return chartData;
+  }
+
+  async getAllPrices() {
+    const priceData: any[] = [];
+    this.denoms.forEach(async (denom) => {
+      const price = await this.getPrice(denom);
+      priceData.push({ denom: price });
+    });
+    return priceData;
   }
 }
