@@ -26,73 +26,98 @@ export class AppService {
   }
 
   async getChart(denom: string) {
-    const temp = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${this.currency}&days=${this.days}`,
-    );
-    const label = [];
-    const sets = [];
+    try {
+      const temp = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${this.currency}&days=${this.days}`,
+      );
+      const label = [];
+      const sets = [];
 
-    const half12 = Math.ceil(temp.data.prices.length / 2);
-    const slimtemp12 = temp.data.prices.slice(half12);
+      const half12 = Math.ceil(temp.data.prices.length / 2);
+      const slimtemp12 = temp.data.prices.slice(half12);
 
-    const half6 = Math.ceil(slimtemp12.length / 2);
-    const slimtemp6 = temp.data.prices.slice(half6);
+      const half6 = Math.ceil(slimtemp12.length / 2);
+      const slimtemp6 = temp.data.prices.slice(half6);
 
-    slimtemp6.forEach((price) => {
-      label.push(moment(new Date(price[0])).toString());
-      sets.push(price[1]);
-    });
+      slimtemp6.forEach((price) => {
+        label.push(moment(new Date(price[0])).toString());
+        sets.push(price[1]);
+      });
 
-    const data = {
-      labels: label,
-      datasets: [
-        {
-          data: sets,
-          color: (opacity = 0) => `#39C3E6`, // optional
-        },
-      ],
-    };
+      const data = {
+        labels: label,
+        datasets: [
+          {
+            data: sets,
+            color: (opacity = 0) => `#39C3E6`, // optional
+          },
+        ],
+      };
 
-    return [data, sets];
+      return [data, sets];
+    } catch (error) {
+      console.log(error);
+      return { error: error.toString() };
+    }
   }
 
   async getPrice(denom: string) {
-    const res = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${denom}`,
-    );
-    return {
-      price: res.data.market_data.current_price.usd,
-      change: res.data.market_data.price_change_percentage_24h,
-    };
+    try {
+      const res = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${denom}`,
+      );
+      return {
+        price: res.data.market_data.current_price.usd,
+        change: res.data.market_data.price_change_percentage_24h,
+      };
+    } catch (error) {
+      console.log(error);
+      return { error: error.toString() };
+    }
   }
 
   async getAllChartsAndPrices() {
-    const chartData: any[] = [];
-    const priceData: any[] = [];
-    this.denoms.forEach(async (denom) => {
-      const chart = await this.getChart(denom);
-      const price = await this.getPrice(denom);
-      chartData.push({ denom: chart });
-      priceData.push({ denom: price });
-    });
-    return { charts: chartData, prices: priceData };
+    try {
+      const chartData: any[] = [];
+      const priceData: any[] = [];
+      this.denoms.forEach(async (denom) => {
+        const chart = await this.getChart(denom);
+        const price = await this.getPrice(denom);
+        chartData.push({ denom: chart });
+        priceData.push({ denom: price });
+      });
+      return { charts: chartData, prices: priceData };
+    } catch (error) {
+      console.log(error);
+      return { error: error.toString() };
+    }
   }
 
   async getAllCharts() {
-    const chartData: any[] = [];
-    this.denoms.forEach(async (denom) => {
-      const chart = await this.getChart(denom);
-      chartData.push({ denom: chart });
-    });
-    return chartData;
+    try {
+      const chartData: any[] = [];
+      this.denoms.forEach(async (denom) => {
+        const chart = await this.getChart(denom);
+        chartData.push({ denom: chart });
+      });
+      return chartData;
+    } catch (error) {
+      console.log(error);
+      return { error: error.toString() };
+    }
   }
 
   async getAllPrices() {
-    const priceData: any[] = [];
-    this.denoms.forEach(async (denom) => {
-      const price = await this.getPrice(denom);
-      priceData.push({ denom: price });
-    });
-    return priceData;
+    try {
+      const priceData: any[] = [];
+      this.denoms.forEach(async (denom) => {
+        const price = await this.getPrice(denom);
+        priceData.push({ denom: price });
+      });
+      return priceData;
+    } catch (error) {
+      console.log(error);
+      return { error: error.toString() };
+    }
   }
 }
