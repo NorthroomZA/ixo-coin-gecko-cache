@@ -80,12 +80,12 @@ export class AppService {
     try {
       const chartData: any[] = [];
       const priceData: any[] = [];
-      this.denoms.forEach(async (denom) => {
+      for (const denom of this.denoms) {
         const chart = await this.getChart(denom);
         const price = await this.getPrice(denom);
-        chartData.push({ denom: chart });
-        priceData.push({ denom: price });
-      });
+        chartData.push({ [denom]: chart });
+        priceData.push({ [denom]: price });
+      }
       return { charts: chartData, prices: priceData };
     } catch (error) {
       console.log(error);
@@ -96,10 +96,10 @@ export class AppService {
   async getAllCharts() {
     try {
       const chartData: any[] = [];
-      this.denoms.forEach(async (denom) => {
+      for (const denom of this.denoms) {
         const chart = await this.getChart(denom);
-        chartData.push({ denom: chart });
-      });
+        chartData.push({ [denom]: chart });
+      }
       return chartData;
     } catch (error) {
       console.log(error);
@@ -110,10 +110,10 @@ export class AppService {
   async getAllPrices() {
     try {
       const priceData: any[] = [];
-      this.denoms.forEach(async (denom) => {
+      for (const denom of this.denoms) {
         const price = await this.getPrice(denom);
-        priceData.push({ denom: price });
-      });
+        priceData.push({ [denom]: price });
+      }
       return priceData;
     } catch (error) {
       console.log(error);
