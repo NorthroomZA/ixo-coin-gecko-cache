@@ -1,5 +1,5 @@
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Interval } from '@nestjs/schedule';
 import { Cache } from 'cache-manager';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
@@ -145,15 +145,17 @@ export class AppService {
     }
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Interval(60000)
   async setCache() {
     try {
       console.log('Updating Cache');
+      console.time('Cache Update Took');
       await this.setChartCache();
       await this.setPriceCache();
       await this.setAllChartsCache();
       await this.setAllPricesCache();
       await this.setAllCache();
+      console.timeEnd('Cache Update Took');
     } catch (error) {
       console.log(error);
     }
