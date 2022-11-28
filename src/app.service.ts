@@ -123,7 +123,9 @@ export class AppService {
 
   async getAllChartsAndPrices() {
     try {
-      return this.cacheManager.get('all');
+      const t = await this.cacheManager.get('all');
+      console.log('ALL', t);
+      return t;
     } catch (error) {
       console.log(error);
       return { error: error.toString() };
