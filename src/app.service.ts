@@ -53,7 +53,7 @@ export class AppService {
           },
         ],
       };
-      await this.cacheManager.set(`${denom}-chart`, [data, sets]);
+      await this.cacheManager.set(`${denom}-chart`, [data, sets],60);
     }
   }
 
@@ -65,7 +65,7 @@ export class AppService {
       await this.cacheManager.set(`${denom}-price`, {
         price: temp.data.market_data.current_price.usd,
         change: temp.data.market_data.price_change_percentage_24h,
-      });
+      },60);
     }
   }
 
@@ -93,7 +93,7 @@ export class AppService {
     await this.cacheManager.set('all', {
       charts: chartData,
       prices: priceData,
-    });
+    },60);
   }
 
   getHello(): string {
