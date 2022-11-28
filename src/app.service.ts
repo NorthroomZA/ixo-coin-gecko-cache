@@ -4,6 +4,7 @@ import { Cache } from 'cache-manager';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import moment from 'moment';
+import { delay } from './delay';
 
 axiosRetry(axios, { retries: 3 });
 
@@ -27,6 +28,7 @@ export class AppService {
 
   private async setChartCache() {
     for (const denom of this.denoms) {
+      await delay(500);
       const temp = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${denom}/market_chart?vs_currency=${this.currency}&days=${this.days}`,
       );
@@ -53,19 +55,20 @@ export class AppService {
           },
         ],
       };
-      await this.cacheManager.set(`${denom}-chart`, [data, sets],60);
+      await this.cacheManager.set(`${denom}-chart`, [data, sets]);
     }
   }
 
   private async setPriceCache() {
     for (const denom of this.denoms) {
+      await delay(500);
       const temp = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${denom}`,
       );
       await this.cacheManager.set(`${denom}-price`, {
         price: temp.data.market_data.current_price.usd,
         change: temp.data.market_data.price_change_percentage_24h,
-      },60);
+      });
     }
   }
 
@@ -93,7 +96,7 @@ export class AppService {
     await this.cacheManager.set('all', {
       charts: chartData,
       prices: priceData,
-    },60);
+    });
   }
 
   getHello(): string {
@@ -150,10 +153,15 @@ export class AppService {
     try {
       console.log('Updating Cache');
       console.time('Cache Update Took');
+
       await this.setChartCache();
+
       await this.setPriceCache();
+
       await this.setAllChartsCache();
+
       await this.setAllPricesCache();
+
       await this.setAllCache();
       console.timeEnd('Cache Update Took');
     } catch (error) {
