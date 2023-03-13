@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   app:
-    container_name: ixo-coin-gecko-cache
-    image: northroomza/ixo-coin-gecko-cache:latest
+    container_name: ixo-coincodex-cache
+    image: northroomza/ixo-coincodex-cache:latest
     ports:
       - 3000:3000
