@@ -8,6 +8,7 @@ import {
 import { AppService } from './app.service';
 
 @Controller()
+@UseInterceptors(CacheInterceptor)
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -16,28 +17,58 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get(':denom')
-  getChart(@Param('denom') denom: string) {
-    return this.appService.getChart(denom);
+  @Get('allcoins')
+  getAllCoins() {
+    try {
+      return this.appService.getAllCoins();
+    } catch (error) {
+      return error.toString();
+    }
   }
 
-  @Get(':denom/price')
-  getPrice(@Param('denom') denom: string) {
-    return this.appService.getPrice(denom);
+  @Get('coin/:symbol')
+  getCoin(@Param('symbol') symbol: string) {
+    try {
+      return this.appService.getCoin(symbol);
+    } catch (error) {
+      return error.toString();
+    }
   }
 
-  @Get('all')
-  getAllChartsPrices() {
-    return this.appService.getAllChartsAndPrices();
+  @Get('coinhistory/:symbol/:startdate/:enddate/:samples')
+  getCoinHistory(
+    @Param('symbol') symbol: string,
+    @Param('startdate') startDate: string,
+    @Param('enddate') endDate: string,
+    @Param('samples') samples: string,
+  ) {
+    try {
+      return this.appService.getCoinHistory(
+        symbol,
+        startDate,
+        endDate,
+        samples,
+      );
+    } catch (error) {
+      return error.toString();
+    }
   }
 
-  @Get('allcharts')
-  getAllCharts() {
-    return this.appService.getAllCharts();
+  @Get('coinmarkets/:symbol')
+  getCoinMarkets(@Param('symbol') symbol: string) {
+    try {
+      return this.appService.getCoinMarkets(symbol);
+    } catch (error) {
+      return error.toString();
+    }
   }
 
-  @Get('allprices')
-  getAllPrices() {
-    return this.appService.getAllPrices();
+  @Get('coinranges/:symbol')
+  getCoinRanges(@Param('symbol') symbol: string) {
+    try {
+      return this.appService.getCoinRanges(symbol);
+    } catch (error) {
+      return error.toString();
+    }
   }
 }

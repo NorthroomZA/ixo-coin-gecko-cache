@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    CacheModule.register({ ttl: 300000, max: 1000 }),
+    CacheModule.register({ ttl: 60000, max: 1000000 }),
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
