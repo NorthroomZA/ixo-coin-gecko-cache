@@ -32,18 +32,22 @@ export class AppService {
         change: coinData.price_change_1D_percent,
       };
       prices.push({ [coinData.shortname]: price });
-      const chartData = await this.getCoinHistory(
+      const coinHistory = await this.getCoinHistory(
         symbol,
         yesterday,
         today,
         '1',
       );
-      const chart = chartData[symbol.toUpperCase()].map((e) => {
-        const time = new Date(+e[0] * 1000).toISOString();
-        const price = e[1];
-        return { [time]: price };
+      const chartLables = coinHistory[symbol.toUpperCase()].map((e) =>
+        new Date(+e[0] * 1000).toISOString(),
+      );
+      const chartData = coinHistory[symbol.toUpperCase()].map((e) => e[1]);
+      charts.push({
+        [coinData.shortname]: {
+          labels: chartLables,
+          data: chartData,
+        },
       });
-      charts.push({ [coinData.shortname]: chart });
     }
     const all = {
       charts,

@@ -27,11 +27,14 @@ Parameter and Return Objects from [CoinCodex](https://coincodex.com/page/api/)
     {
       "charts": [
         {
-          "symbol": [
-            {
-              "time": 0.00
-            }
-          ]
+          "symbol": {
+            "labels": [
+              ""
+            ],
+            "data": [
+              0.00
+            ]
+          }
         }
       ],
       "prices": [
