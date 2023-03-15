@@ -21,6 +21,29 @@ Parameter and Return Objects from [CoinCodex](https://coincodex.com/page/api/)
     ```
     Hello IXO!
     ```
+- GET `/all`
+  - Returns:
+    ```
+    {
+      "charts": [
+        {
+          "symbol": [
+            {
+              "time": 0.00
+            }
+          ]
+        }
+      ],
+      "prices": [
+        {
+          "symbol": {
+            "price": 0.00,
+            "change": "0.00"
+          }
+        }
+      ]
+    }
+    ```
 - GET `/allcoins`
   - Returns:
     ```

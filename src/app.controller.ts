@@ -17,6 +17,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('all')
+  getAll() {
+    try {
+      return this.appService.getAll();
+    } catch (error) {
+      return error.toString();
+    }
+  }
+
   @Get('allcoins')
   getAllCoins() {
     try {

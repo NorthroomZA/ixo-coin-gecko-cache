@@ -15,6 +15,6 @@ async function bootstrap() {
   await app.listen(3000, '0.0.0.0');
 
   const appService = app.get(AppService);
-  // await appService.setCache();
+  await appService.updateCache();
 }
 bootstrap();
